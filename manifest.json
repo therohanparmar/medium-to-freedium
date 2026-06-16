@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Freedium - Read Medium Articles Free",
+  "version": "1.0.0",
+  "description": "Read any Medium article on Freedium in one click. Open members-only stories free - no paywall, no setup, no tracking.",
+  "author": "Rohan Parmar",
+  "homepage_url": "https://github.com/rohan-parmar/medium-to-freedium",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "open-in-freedium@rohanparmar",
+      "strict_min_version": "109.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://medium.com/*",
+        "https://*.medium.com/*"
+      ],
+      "js": ["config.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://freedium-mirror.cfd/*",
+        "https://freedium.cfd/*"
+      ],
+      "js": ["freedium-retry.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

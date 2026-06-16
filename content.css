@@ -1,0 +1,115 @@
+/**
+ * Open in Freedium - styles for the in-page button and toast.
+ * Scoped under the m2f- prefix to avoid clashing with Medium's classes.
+ * CSS variables drive theming so light and dark modes stay in sync.
+ */
+
+:root {
+  /* Deep green pill with white label/icon: on-brand and AA-contrast (5:1). */
+  --m2f-bg: #15803d;
+  --m2f-bg-hover: #116e33;
+  --m2f-fg: #ffffff;
+  --m2f-shadow: rgba(21, 128, 61, 0.32);
+  --m2f-shadow-hover: rgba(21, 128, 61, 0.45);
+  --m2f-focus-ring: rgba(21, 128, 61, 0.5);
+}
+
+/* Floating button */
+.m2f-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483646; /* above Medium's UI, below our toast */
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--m2f-fg);
+  white-space: nowrap;
+
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--m2f-bg);
+  box-shadow: 0 4px 14px var(--m2f-shadow);
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.m2f-button:hover {
+  background-color: var(--m2f-bg-hover);
+  box-shadow: 0 6px 20px var(--m2f-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.m2f-button:active {
+  transform: translateY(0);
+}
+
+.m2f-button:focus-visible {
+  outline: none;
+  box-shadow: 0 4px 14px var(--m2f-shadow), 0 0 0 3px var(--m2f-focus-ring);
+}
+
+.m2f-button__icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Toast notification */
+#m2f-freedium-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 80px; /* just above the button */
+  z-index: 2147483647;
+
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: rgba(25, 25, 25, 0.92);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 14px var(--m2f-shadow);
+
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#m2f-freedium-toast.m2f-toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dark mode: keep the green, deepen the shadow so the pill reads on a dark page */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --m2f-shadow: rgba(0, 0, 0, 0.5);
+    --m2f-shadow-hover: rgba(0, 0, 0, 0.65);
+    --m2f-focus-ring: rgba(46, 163, 80, 0.6);
+  }
+
+  #m2f-freedium-toast {
+    background-color: rgba(240, 240, 240, 0.95);
+    color: #111111;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m2f-button,
+  #m2f-freedium-toast {
+    transition: none;
+  }
+}

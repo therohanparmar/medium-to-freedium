@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Packaged extension (build artifacts uploaded to the Web Store)
+*.zip
+*.crx
+*.pem
