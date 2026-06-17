@@ -46,18 +46,6 @@ That's it - the article opens on Freedium in a new tab.
 - 🔁 **Self-healing** - if Freedium hits a temporary error, it quietly retries so you still get the article.
 - 🔒 **Private & lightweight** - no data collection, no tracking, no external libraries.
 
-## Browser Support
-
-| Browser | Installation |
-|----------|-------------|
-| Chrome | Chrome Web Store |
-| Brave | Chrome Web Store |
-| Microsoft Edge | Chrome Web Store |
-| Opera | Chrome Web Store |
-| Vivaldi | Chrome Web Store |
-| Arc | Chrome Web Store |
-| Firefox | Firefox Add-ons |
-
 ## Privacy
 
 No data is collected, stored, or transmitted. Read the full [privacy policy](PRIVACY.md).
