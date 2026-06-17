@@ -8,11 +8,19 @@
 
 <p align="center">
   <a href="https://chromewebstore.google.com/detail/fmjhglncijcinacolmmaepghmgcloljf" title="Chrome Web Store">
-    <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="56" alt="Add to Chrome" valign="middle" />
+    <img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome.svg" width="56" alt="Add to Chrome" />
   </a>
+
   &nbsp;&nbsp;&nbsp;&nbsp;
+
+  <a href="https://chromewebstore.google.com/detail/fmjhglncijcinacolmmaepghmgcloljf" title="Brave Browser">
+    <img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/brave/brave.svg" width="56" alt="Add to Brave" />
+  </a>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;
+
   <a href="https://addons.mozilla.org/en-US/firefox/addon/read-on-freedium/" title="Mozilla Add-ons">
-    <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/firefox/firefox.svg" width="56" alt="Add to Firefox" valign="middle" />
+    <img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox.svg" width="56" alt="Add to Firefox" />
   </a>
 </p>
 
