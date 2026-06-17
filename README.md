@@ -8,19 +8,15 @@
 
 <p align="center">
   <a href="https://chromewebstore.google.com/detail/fmjhglncijcinacolmmaepghmgcloljf" title="Chrome Web Store">
-    <img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome.svg" width="56" alt="Add to Chrome" />
+    <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="56" alt="Add to Chrome" valign="middle" />
   </a>
-
   &nbsp;&nbsp;&nbsp;&nbsp;
-
-  <a href="https://chromewebstore.google.com/detail/fmjhglncijcinacolmmaepghmgcloljf" title="Brave Browser">
-    <img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/brave/brave.svg" width="56" alt="Add to Brave" />
+  <a href="https://chromewebstore.google.com/detail/fmjhglncijcinacolmmaepghmgcloljf" title="Brave Web Store">
+    <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/brave/brave.svg" width="56" alt="Add to Brave" valign="middle" />
   </a>
-
   &nbsp;&nbsp;&nbsp;&nbsp;
-
   <a href="https://addons.mozilla.org/en-US/firefox/addon/read-on-freedium/" title="Mozilla Add-ons">
-    <img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox.svg" width="56" alt="Add to Firefox" />
+    <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/firefox/firefox.svg" width="56" alt="Add to Firefox" valign="middle" />
   </a>
 </p>
 
@@ -49,6 +45,18 @@ That's it - the article opens on Freedium in a new tab.
 - ♿ **Accessible** - keyboard friendly with clear focus styles.
 - 🔁 **Self-healing** - if Freedium hits a temporary error, it quietly retries so you still get the article.
 - 🔒 **Private & lightweight** - no data collection, no tracking, no external libraries.
+
+## Browser Support
+
+| Browser | Installation |
+|----------|-------------|
+| Chrome | Chrome Web Store |
+| Brave | Chrome Web Store |
+| Microsoft Edge | Chrome Web Store |
+| Opera | Chrome Web Store |
+| Vivaldi | Chrome Web Store |
+| Arc | Chrome Web Store |
+| Firefox | Firefox Add-ons |
 
 ## Privacy
 
