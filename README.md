@@ -7,11 +7,11 @@
 <p align="center">Read any Medium article on <a href="https://freedium-mirror.cfd">Freedium</a> with a single click.</p>
 
 <p align="center">
-  <a href="#" title="Chrome Web Store">
+  <a href="https://chromewebstore.google.com/detail/fmjhglncijcinacolmmaepghmgcloljf" title="Chrome Web Store">
     <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="56" alt="Add to Chrome" valign="middle" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="#" title="Mozilla Add-ons">
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/read-on-freedium/" title="Mozilla Add-ons">
     <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/firefox/firefox.svg" width="56" alt="Add to Firefox" valign="middle" />
   </a>
 </p>
