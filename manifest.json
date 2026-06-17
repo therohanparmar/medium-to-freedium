@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Read any Medium article on Freedium in one click. Open members-only stories free - no paywall, no setup, no tracking.",
   "author": "Rohan Parmar",
-  "homepage_url": "https://github.com/rohan-parmar/medium-to-freedium",
+  "homepage_url": "https://github.com/therohanparmar/medium-to-freedium",
   "browser_specific_settings": {
     "gecko": {
       "id": "open-in-freedium@rohanparmar",
