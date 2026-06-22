@@ -38,22 +38,26 @@ Hit a members-only wall on Medium? **Open in Freedium** adds a small **Read on F
 button to the bottom-right corner of any Medium article. Click it, and the same story
 opens on [Freedium](https://freedium-mirror.cfd) in a new tab - free to read.
 
+It also drops a compact Freedium icon into each story card in your feed, so you can
+jump straight to the free version without opening the article first.
+
 No accounts. No setup. No tracking.
 
 ## How to use
 
 1. Install the extension using a button above.
-2. Open any Medium article.
-3. Click the green **Read on Freedium** button in the bottom-right corner.
+2. Open any Medium article, or browse your feed.
+3. Click the green **Read on Freedium** button in the article's bottom-right corner,
+   or the green Freedium icon on any feed card.
 
 That's it - the article opens on Freedium in a new tab.
 
 ## Features
 
-- 🟢 **One click** to open the current Medium article on Freedium.
-- 🎯 **Shows only where it should** - on article pages, never on your feed or profile.
+- 🟢 **One click** to open a Medium article on Freedium.
+- 📰 **Works on your feed too** - a Freedium icon on every story card, not just article pages.
 - 🌗 **Dark mode** - matches your browser's light/dark theme automatically.
-- ⚡ **Stays out of the way** - appears on articles and disappears when you go back.
+- ⚡ **Stays out of the way** - the article button appears only on stories and disappears when you go back.
 - ♿ **Accessible** - keyboard friendly with clear focus styles.
 - 🔁 **Self-healing** - if Freedium hits a temporary error, it quietly retries so you still get the article.
 - 🔒 **Private & lightweight** - no data collection, no tracking, no external libraries.
@@ -84,4 +88,4 @@ developer setup, how it works, and the project structure.
 This is an independent tool and is not affiliated with, endorsed by, or sponsored by
 Medium or Freedium. Please respect content creators and support the writers you value.
 
-<p align="center"><sub><strong>Open in Freedium</strong> · v1.0.0 · by <a href="https://www.linkedin.com/in/rohanrparmar/">Rohan Parmar</a></sub></p>
+<p align="center"><sub><strong>Open in Freedium</strong> · v1.1.0 · by <a href="https://www.linkedin.com/in/rohanrparmar/">Rohan Parmar</a></sub></p>

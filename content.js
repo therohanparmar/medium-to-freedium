@@ -19,23 +19,31 @@
     ).replace(/\/+$/, "") + "/";
 
   const BUTTON_ID = "m2f-freedium-button";
+  const CARD_BUTTON_CLASS = "m2f-card-button";
+  const CARD_DONE_ATTR = "data-m2f-card";
   const TOAST_ID = "m2f-freedium-toast";
   const TOAST_DURATION_MS = 2200;
   const SVG_NS = "http://www.w3.org/2000/svg";
 
+  // A 12-char hex post id terminates every Medium story URL (e.g.
+  // .../title-1a2b3c4d5e6f or /p/1a2b3c4d5e6f). Listing pages never end in one.
+  const POST_ID_RE = /[0-9a-f]{12}$/;
+
   const isFreedium = () => location.hostname.includes("freedium");
 
-  // Medium story URLs end in a 12-char hex post id (e.g. .../title-1a2b3c4d5e6f
-  // or /p/1a2b3c4d5e6f). Listing pages (feed, tags, profiles) never do.
+  // Listing pages (feed, tags, profiles) never end in a post id; story pages do.
   const isArticlePage = () => {
     const lastSegment = location.pathname.replace(/\/+$/, "").split("/").pop() || "";
-    return /[0-9a-f]{12}$/.test(lastSegment);
+    return POST_ID_RE.test(lastSegment);
   };
 
-  // Use the clean canonical URL (origin + path), dropping Medium's tracking
-  // query (?source=...) and any #fragment. Those extras can make Freedium 500.
-  const buildFreediumUrl = () =>
-    `${FREEDIUM_BASE}${location.origin}${location.pathname}`;
+  // Turn a Medium story location into its Freedium equivalent. We keep only the
+  // clean canonical URL (origin + path), dropping Medium's tracking query
+  // (?source=...) and any #fragment. Those extras can make Freedium 500.
+  const toFreediumUrl = (origin, pathname) =>
+    `${FREEDIUM_BASE}${origin}${pathname}`;
+
+  const buildFreediumUrl = () => toFreediumUrl(location.origin, location.pathname);
 
   const showToast = (message) => {
     let toast = document.getElementById(TOAST_ID);
@@ -58,18 +66,18 @@
     );
   };
 
-  const openOnFreedium = () => {
+  const openOnFreedium = (url) => {
     showToast("Opening article on Freedium…");
-    window.open(buildFreediumUrl(), "_blank", "noopener,noreferrer");
+    window.open(url || buildFreediumUrl(), "_blank", "noopener,noreferrer");
   };
 
-  const createBookIcon = () => {
+  const createBookIcon = (size = 18) => {
     const svg = document.createElementNS(SVG_NS, "svg");
     Object.entries({
       class: "m2f-button__icon",
       viewBox: "0 0 24 24",
-      width: "18",
-      height: "18",
+      width: String(size),
+      height: String(size),
       fill: "none",
       stroke: "currentColor",
       "stroke-width": "2",
@@ -103,9 +111,158 @@
     label.textContent = "Read on Freedium";
 
     button.append(createBookIcon(), label);
-    button.addEventListener("click", openOnFreedium);
+    button.addEventListener("click", () => openOnFreedium());
     return button;
   };
+
+  // --- Listing-card buttons --------------------------------------------------
+  //
+  // Feed/listing pages render each story as <article data-testid="post-preview">.
+  // We add a compact "Freedium" pill into each card's action toolbar so users
+  // can jump straight to the free reader without opening the story first.
+
+  const createCardButton = () => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = CARD_BUTTON_CLASS;
+    button.setAttribute("aria-label", "Read this story on Freedium");
+    button.title = "Read on Freedium";
+
+    const label = document.createElement("span");
+    label.className = "m2f-card-button__label";
+    label.textContent = "Read on Freedium";
+
+    button.append(createBookIcon(16), label);
+    button.addEventListener("click", (event) => {
+      // The toolbar lives inside the card; stop the click from bubbling to any
+      // surrounding link/handler and open the URL captured on the button.
+      event.preventDefault();
+      event.stopPropagation();
+      const url = button.dataset.freediumUrl;
+      if (url) openOnFreedium(url);
+    });
+    return button;
+  };
+
+  // Derive a story's Freedium URL from the first link in the card whose path
+  // ends in a post id (the title link). Returns null for non-story cards.
+  const getCardFreediumUrl = (article) => {
+    for (const anchor of article.querySelectorAll("a[href]")) {
+      let url;
+      try {
+        url = new URL(anchor.getAttribute("href"), location.origin);
+      } catch {
+        continue;
+      }
+      const lastSegment = url.pathname.replace(/\/+$/, "").split("/").pop() || "";
+      if (POST_ID_RE.test(lastSegment)) {
+        return toFreediumUrl(url.origin, url.pathname);
+      }
+    }
+    return null;
+  };
+
+  // Medium splits each card's toolbar into a left cluster (claps, responses,
+  // repost) and a right cluster (dislike, bookmark, more options) with a gap
+  // between them. We drop the pill into that gap, i.e. right before the
+  // "not interested" (dislike) button's row-level wrapper. Returns the toolbar
+  // row and the child to insert before. We anchor on stable aria-labels rather
+  // than Medium's churning obfuscated class names.
+  const DISLIKE_SELECTOR =
+    'button[aria-label="I\'m not interested in this story"]';
+  const MORE_SELECTOR = 'button[aria-label="More options"]';
+
+  const findToolbarSlot = (dislikeButton, article) => {
+    let node = dislikeButton;
+    while (node.parentElement && node.parentElement !== article) {
+      const parent = node.parentElement;
+      // The toolbar row is the first ancestor that also holds "More options";
+      // `node` is then the row-level wrapper around the dislike button.
+      if (parent.querySelector(MORE_SELECTOR)) {
+        return { row: parent, before: node };
+      }
+      node = parent;
+    }
+    return null;
+  };
+
+  // Inserts (or refreshes) the pill inside `parent` as its last child, or, when
+  // `before` is given and belongs to `parent`, just ahead of it. Idempotent and
+  // self-healing across Medium's re-renders.
+  const placePill = (parent, before, freediumUrl) => {
+    if (!parent) return;
+    let button = parent.querySelector(`:scope > .${CARD_BUTTON_CLASS}`);
+    if (!button) {
+      button = createCardButton();
+      if (before && before.parentElement === parent) {
+        parent.insertBefore(button, before);
+      } else {
+        parent.appendChild(button);
+      }
+    }
+    button.dataset.freediumUrl = freediumUrl; // keep fresh if a card recycles
+  };
+
+  // Injects a single Freedium pill into each feed card, at the end of the left
+  // cluster (claps/responses/repost) so it hugs those icons; that cluster is
+  // the sibling right before the dislike wrapper. Medium renders more than one
+  // toolbar copy per card for responsive layouts, and at some widths more than
+  // one is visible — so we target the visible toolbar and strip any strays to
+  // avoid duplicate pills.
+  const ensureCardButtons = () => {
+    if (isFreedium()) return;
+    for (const article of document.querySelectorAll(
+      'article[data-testid="post-preview"]',
+    )) {
+      // Sticky: if a pill is already in place, keep exactly one and leave it be.
+      // Re-evaluating/moving a placed pill is what makes it flicker, so we don't.
+      const pills = article.querySelectorAll(`.${CARD_BUTTON_CLASS}`);
+      if (pills.length) {
+        for (let i = 1; i < pills.length; i++) pills[i].remove();
+        if (pills[0].isConnected) continue;
+      }
+
+      const freediumUrl = getCardFreediumUrl(article);
+      if (!freediumUrl) {
+        // No resolvable story link: mark as skipped so the heal check below
+        // doesn't treat this card as perpetually "missing" its button.
+        article.setAttribute(CARD_DONE_ATTR, "skip");
+        continue;
+      }
+
+      // Prefer a visible toolbar (offsetParent is null when display:none);
+      // fall back to the first copy if none report visible yet.
+      const dislikeButtons = [...article.querySelectorAll(DISLIKE_SELECTOR)];
+      const dislikeButton =
+        dislikeButtons.find((btn) => btn.offsetParent !== null) ||
+        dislikeButtons[0];
+
+      const slot = dislikeButton && findToolbarSlot(dislikeButton, article);
+      if (slot) {
+        const leftCluster = slot.before.previousElementSibling;
+        const target = leftCluster || slot.row; // append vs. insert in the gap
+        const before = leftCluster ? null : slot.before;
+        placePill(target, before, freediumUrl);
+      }
+      article.setAttribute(CARD_DONE_ATTR, "done");
+    }
+  };
+
+  // A card needs (re)processing if we've never touched it, or if a re-render
+  // wiped a button we placed. Skipped cards are left alone.
+  const cardNeedsButton = (article) => {
+    const state = article.getAttribute(CARD_DONE_ATTR);
+    if (state === "skip") return false;
+    if (state !== "done") return true;
+    return !article.querySelector(`.${CARD_BUTTON_CLASS}`);
+  };
+
+  // A card we already finished but whose pill a re-render just stripped. These
+  // must be re-added synchronously (before paint) to avoid a visible flicker;
+  // brand-new cards can wait for the debounce.
+  const cardLostButton = (article) =>
+    article.getAttribute(CARD_DONE_ATTR) === "done" &&
+    !article.querySelector(`.${CARD_BUTTON_CLASS}`);
 
   // Adds the button on article views and removes it everywhere else. Idempotent.
   const ensureButton = () => {
@@ -124,9 +281,14 @@
   let lastUrl = location.href;
   let debounceTimer = null;
 
+  const refresh = () => {
+    ensureButton();
+    ensureCardButtons();
+  };
+
   const scheduleEnsure = () => {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(ensureButton, 60);
+    debounceTimer = setTimeout(refresh, 60);
   };
 
   const handleLocationChange = () => {
@@ -155,15 +317,28 @@
 
   const observer = new MutationObserver(() => {
     const urlChanged = location.href !== lastUrl;
-    const needsHeal = !document.getElementById(BUTTON_ID) && isArticlePage();
-    if (!urlChanged && !needsHeal) return;
+    const floatingNeedsHeal = !document.getElementById(BUTTON_ID) && isArticlePage();
+    if (urlChanged || floatingNeedsHeal) {
+      if (urlChanged) lastUrl = location.href;
+      scheduleEnsure();
+    }
 
-    if (urlChanged) lastUrl = location.href;
-    scheduleEnsure();
+    if (isFreedium()) return;
+    const cards = [
+      ...document.querySelectorAll('article[data-testid="post-preview"]'),
+    ];
+    // A re-render that strips a placed pill must be undone in this same callback
+    // (a microtask, before the browser paints) so the pill never visibly blinks.
+    // Brand-new cards from infinite scroll have no such constraint — debounce.
+    if (cards.some(cardLostButton)) {
+      ensureCardButtons();
+    } else if (cards.some(cardNeedsButton)) {
+      scheduleEnsure();
+    }
   });
 
   const init = () => {
-    ensureButton();
+    refresh();
     observer.observe(document.body, { childList: true, subtree: true });
   };
 

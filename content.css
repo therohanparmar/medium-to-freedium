@@ -66,6 +66,82 @@
   flex-shrink: 0;
 }
 
+/* Fixed-size icon button injected after the card's repost/comment icons. Its
+   footprint never changes on hover — the label is an absolutely positioned
+   tooltip — so hovering can't reflow the toolbar and make the button flicker. */
+.m2f-card-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  margin: 0 6px;
+
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  color: var(--m2f-fg);
+  background-color: var(--m2f-bg);
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.m2f-card-button:hover {
+  background-color: var(--m2f-bg-hover);
+  box-shadow: 0 2px 8px var(--m2f-shadow-hover);
+}
+
+.m2f-card-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--m2f-focus-ring);
+}
+
+.m2f-card-button .m2f-button__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Tooltip label: floats above the icon on hover/focus without taking layout
+   space (so it never shifts the button out from under the cursor). */
+.m2f-card-button__label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: rgba(25, 25, 25, 0.92);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.m2f-card-button:hover .m2f-card-button__label,
+.m2f-card-button:focus-visible .m2f-card-button__label {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m2f-card-button,
+  .m2f-card-button__label {
+    transition: none;
+  }
+}
+
 /* Toast notification */
 #m2f-freedium-toast {
   position: fixed;
