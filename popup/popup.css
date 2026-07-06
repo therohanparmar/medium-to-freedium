@@ -1,0 +1,124 @@
+/**
+ * Open in Freedium - toolbar popup styles.
+ * Shares the extension's green accent; adapts to light/dark themes.
+ */
+
+:root {
+  --accent: #15803d;
+  --accent-hover: #116e33;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #5c6670;
+  --border: #e6e8eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #2ea350;
+    --accent-hover: #3fb15f;
+    --bg: #17191c;
+    --text: #f2f3f4;
+    --text-muted: #9aa4ad;
+    --border: #262a2e;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.popup {
+  width: 300px;
+  padding: 18px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__logo {
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.header__version {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.blurb {
+  margin: 16px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.action {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.action:hover {
+  background-color: var(--accent-hover);
+}
+
+.action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.links__item {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.links__item:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action {
+    transition: none;
+  }
+}

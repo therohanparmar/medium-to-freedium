@@ -207,7 +207,7 @@
   // cluster (claps/responses/repost) so it hugs those icons; that cluster is
   // the sibling right before the dislike wrapper. Medium renders more than one
   // toolbar copy per card for responsive layouts, and at some widths more than
-  // one is visible — so we target the visible toolbar and strip any strays to
+  // one is visible, so we target the visible toolbar and strip any strays to
   // avoid duplicate pills.
   const ensureCardButtons = () => {
     if (isFreedium()) return;
@@ -329,7 +329,7 @@
     ];
     // A re-render that strips a placed pill must be undone in this same callback
     // (a microtask, before the browser paints) so the pill never visibly blinks.
-    // Brand-new cards from infinite scroll have no such constraint — debounce.
+    // Brand-new cards from infinite scroll have no such constraint, so debounce.
     if (cards.some(cardLostButton)) {
       ensureCardButtons();
     } else if (cards.some(cardNeedsButton)) {

@@ -67,8 +67,8 @@
 }
 
 /* Fixed-size icon button injected after the card's repost/comment icons. Its
-   footprint never changes on hover — the label is an absolutely positioned
-   tooltip — so hovering can't reflow the toolbar and make the button flicker. */
+   footprint never changes on hover (the label is an absolutely positioned
+   tooltip), so hovering can't reflow the toolbar and make the button flicker. */
 .m2f-card-button {
   position: relative;
   display: inline-flex;
