@@ -356,3 +356,48 @@ body {
   font-size: 13px;
   color: var(--text-soft);
 }
+
+/* ---- Mobile / narrow viewports ---- */
+@media (max-width: 600px) {
+  .page {
+    padding: 28px 14px 40px;
+  }
+
+  .masthead {
+    padding: 26px 20px;
+    border-radius: 16px;
+  }
+
+  .masthead__subtitle {
+    font-size: 14px;
+  }
+
+  .timeline {
+    margin-top: 28px;
+    padding-left: 30px;
+  }
+
+  .timeline::before {
+    left: 6px;
+  }
+
+  .entry__dot {
+    left: -30px;
+    top: 3px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .entry__card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .entry__version {
+    font-size: 20px;
+  }
+
+  .changes {
+    padding-left: 18px;
+  }
+}

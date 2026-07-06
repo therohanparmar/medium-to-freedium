@@ -28,6 +28,31 @@
 /** @type {Release[]} */
 const CHANGELOG = [
   {
+    version: "2.0.0",
+    date: "2026-07-06",
+    tag: "Major Release",
+    summary:
+      "Copy Freedium links in one click, plus a new popup and this What's New page.",
+    changes: [
+      {
+        lead: "Copy Freedium Link",
+        text: "The floating button and every feed card now include a copy button that puts the story's Freedium link straight on your clipboard.",
+      },
+      {
+        lead: "Toolbar Popup",
+        text: "A new popup shows the installed version with quick links to contribute on GitHub or read the privacy policy.",
+      },
+      {
+        lead: "What's New Page",
+        text: "This changelog opens automatically on install and after each update, so you always know what changed.",
+      },
+      {
+        lead: "Responsive Polish",
+        text: "Refined layouts, sizing, and spacing for small screens and *mobile* views.",
+      },
+    ],
+  },
+  {
     version: "1.1.0",
     date: "2026-06-16",
     tag: "Minor Release",
