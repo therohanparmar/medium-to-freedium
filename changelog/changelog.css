@@ -1,0 +1,403 @@
+/**
+ * Open in Freedium - "What's New" page styles.
+ *
+ * Timeline layout with a header card. Uses the extension's green brand accent
+ * and fully adapts to the browser's light/dark theme via prefers-color-scheme.
+ */
+
+:root {
+  --green: #15803d;
+  --green-soft: rgba(21, 128, 61, 0.12);
+  --blue: #2563eb;
+
+  --page-bg-from: #eef2fb;
+  --page-bg-to: #ecf9f1;
+  --surface: #ffffff;
+  --surface-2: #f6faf7;
+  --border: #e6e8ec;
+  --rail: #cdd5e0;
+
+  --text: #16181c;
+  --text-muted: #5c6670;
+  --text-soft: #737d87;
+
+  --tag-bg: #eef1f4;
+  --tag-fg: #58626c;
+  --link: #2563eb;
+  --glow: rgba(52, 199, 123, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green: #3fb15f;
+    --green-soft: rgba(63, 177, 95, 0.16);
+    --blue: #4f83f0;
+
+    --page-bg-from: #0c0e12;
+    --page-bg-to: #0d1512;
+    --surface: #16191e;
+    --surface-2: #1a1f24;
+    --border: #272c33;
+    --rail: #333b45;
+
+    --text: #f1f3f5;
+    --text-muted: #9aa4ad;
+    --text-soft: #8a949d;
+
+    --tag-bg: #232830;
+    --tag-fg: #aab3bd;
+    --link: #7aa5f5;
+    --glow: rgba(63, 177, 95, 0.22);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--page-bg-from), var(--page-bg-to));
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 20px 56px;
+}
+
+/* Visually hidden but available to screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ---- Masthead / header card ---- */
+.masthead {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 34px;
+  box-shadow: 0 8px 30px rgba(20, 30, 50, 0.06);
+}
+
+.masthead__glow {
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+
+.masthead__logo {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+.masthead__subtitle {
+  position: relative;
+  margin: 18px auto 0;
+  max-width: 60ch;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.socials {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  color: var(--text-muted);
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, transform 0.15s ease;
+}
+
+.social:hover {
+  color: var(--green);
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+
+.social:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.social svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social {
+    transition: none;
+  }
+}
+
+/* ---- Timeline ---- */
+.timeline {
+  position: relative;
+  margin-top: 36px;
+  padding-left: 40px;
+}
+
+/* The vertical rail runs behind the dots. */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  bottom: 10px;
+  border-left: 2px dashed var(--rail);
+}
+
+.entry {
+  position: relative;
+  padding-bottom: 28px;
+}
+
+.entry:last-child {
+  padding-bottom: 0;
+}
+
+.entry__dot {
+  position: absolute;
+  left: -38px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 3px var(--page-bg-to);
+}
+
+.entry--latest .entry__dot {
+  background-color: var(--green);
+  box-shadow: 0 0 0 4px var(--green-soft);
+}
+
+/* Meta row: date • tag */
+.entry__meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.entry__date {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.entry__sep {
+  color: var(--text-soft);
+}
+
+.entry__tag {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background-color: var(--tag-bg);
+  color: var(--tag-fg);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.entry__tag--latest {
+  background-color: var(--green-soft);
+  color: var(--green);
+}
+
+/* Release card */
+.entry__card {
+  position: relative;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 26px;
+  box-shadow: 0 6px 22px rgba(20, 30, 50, 0.05);
+}
+
+.entry--latest .entry__card {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+}
+
+.entry__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.entry__version {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.entry__pill {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.entry__summary {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.changes {
+  margin: 18px 0 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.change {
+  color: var(--text);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.change::marker {
+  color: var(--text-soft);
+}
+
+.change__lead {
+  font-weight: 700;
+}
+
+.change em {
+  font-style: italic;
+}
+
+.change__link {
+  color: var(--link);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.change__link:hover {
+  text-decoration: none;
+}
+
+/* ---- Footer ---- */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.footer__link {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+.footer__dot {
+  margin: 0 8px;
+  color: var(--text-soft);
+}
+
+.footer__meta {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+/* ---- Mobile / narrow viewports ---- */
+@media (max-width: 600px) {
+  .page {
+    padding: 28px 14px 40px;
+  }
+
+  .masthead {
+    padding: 26px 20px;
+    border-radius: 16px;
+  }
+
+  .masthead__subtitle {
+    font-size: 14px;
+  }
+
+  .timeline {
+    margin-top: 28px;
+    padding-left: 30px;
+  }
+
+  .timeline::before {
+    left: 6px;
+  }
+
+  .entry__dot {
+    left: -30px;
+    top: 3px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .entry__card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .entry__version {
+    font-size: 20px;
+  }
+
+  .changes {
+    padding-left: 18px;
+  }
+}

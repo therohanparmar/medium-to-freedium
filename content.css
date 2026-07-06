@@ -14,7 +14,7 @@
   --m2f-focus-ring: rgba(21, 128, 61, 0.5);
 }
 
-/* Floating button */
+/* Floating split button: main action segment + copy-link segment */
 .m2f-button {
   position: fixed;
   right: 24px;
@@ -22,30 +22,19 @@
   z-index: 2147483646; /* above Medium's UI, below our toast */
 
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  align-items: stretch;
 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
   color: var(--m2f-fg);
-  white-space: nowrap;
-
-  padding: 12px 18px;
-  border: none;
   border-radius: 999px;
   background-color: var(--m2f-bg);
   box-shadow: 0 4px 14px var(--m2f-shadow);
-  cursor: pointer;
 
-  transition: background-color 0.2s ease, box-shadow 0.2s ease,
-    transform 0.15s ease;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .m2f-button:hover {
-  background-color: var(--m2f-bg-hover);
   box-shadow: 0 6px 20px var(--m2f-shadow-hover);
   transform: translateY(-1px);
 }
@@ -54,9 +43,47 @@
   transform: translateY(0);
 }
 
-.m2f-button:focus-visible {
+/* Shared reset for the two segments */
+.m2f-button__main,
+.m2f-button__copy {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.m2f-button__main {
+  gap: 8px;
+  padding: 12px 14px 12px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 999px 0 0 999px;
+}
+
+.m2f-button__copy {
+  justify-content: center;
+  padding: 12px 14px;
+  border-radius: 0 999px 999px 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.m2f-button__main:hover,
+.m2f-button__copy:hover {
+  background-color: var(--m2f-bg-hover);
+}
+
+.m2f-button__main:focus-visible,
+.m2f-button__copy:focus-visible {
   outline: none;
-  box-shadow: 0 4px 14px var(--m2f-shadow), 0 0 0 3px var(--m2f-focus-ring);
+  box-shadow: inset 0 0 0 2px var(--m2f-focus-ring);
 }
 
 .m2f-button__icon {
@@ -66,43 +93,101 @@
   flex-shrink: 0;
 }
 
-/* Fixed-size icon button injected after the card's repost/comment icons. Its
-   footprint never changes on hover — the label is an absolutely positioned
-   tooltip — so hovering can't reflow the toolbar and make the button flicker. */
-.m2f-card-button {
+.m2f-button__copy-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Card action group: read + copy combined into ONE pill, injected after the
+   card's repost/comment icons. The pill carries the green background; the two
+   segments inside are transparent and split by a faint divider. */
+.m2f-card-actions {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  align-self: center;
+  flex-shrink: 0;
+  margin: 0 6px;
+
+  border-radius: 999px;
+  background-color: var(--m2f-bg);
+
+  transition: box-shadow 0.2s ease;
+}
+
+.m2f-card-actions:hover {
+  box-shadow: 0 2px 8px var(--m2f-shadow-hover);
+}
+
+/* Fixed-size icon segments. Their footprint never changes on hover (the label
+   is an absolutely positioned tooltip), so hovering can't reflow the toolbar
+   and make the pill flicker. */
+.m2f-card-button,
+.m2f-card-copy {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: center;
   flex-shrink: 0;
-  margin: 0 6px;
+  box-sizing: border-box;
 
   width: 30px;
   height: 30px;
   padding: 0;
   border: none;
-  border-radius: 999px;
+  background-color: transparent;
   color: var(--m2f-fg);
-  background-color: var(--m2f-bg);
   cursor: pointer;
 
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
-.m2f-card-button:hover {
+/* Round only the pill's outer ends. */
+.m2f-card-actions > :first-child {
+  border-radius: 999px 0 0 999px;
+}
+
+.m2f-card-actions > :last-child {
+  border-radius: 0 999px 999px 0;
+}
+
+/* Divider drawn exactly on the seam so both segments stay equal width and each
+   icon sits dead-center in its half. */
+.m2f-card-actions::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-0.5px);
+  background-color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.m2f-card-button:hover,
+.m2f-card-copy:hover {
   background-color: var(--m2f-bg-hover);
-  box-shadow: 0 2px 8px var(--m2f-shadow-hover);
 }
 
-.m2f-card-button:focus-visible {
+.m2f-card-button:focus-visible,
+.m2f-card-copy:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--m2f-focus-ring);
+  box-shadow: inset 0 0 0 2px var(--m2f-focus-ring);
 }
 
+/* Book icon reads as the primary action, so it's larger than the copy glyph. */
 .m2f-card-button .m2f-button__icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.m2f-card-copy .m2f-button__copy-icon {
+  width: 13px;
+  height: 13px;
   flex-shrink: 0;
 }
 
@@ -131,12 +216,16 @@
 }
 
 .m2f-card-button:hover .m2f-card-button__label,
-.m2f-card-button:focus-visible .m2f-card-button__label {
+.m2f-card-button:focus-visible .m2f-card-button__label,
+.m2f-card-copy:hover .m2f-card-button__label,
+.m2f-card-copy:focus-visible .m2f-card-button__label {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .m2f-card-actions,
   .m2f-card-button,
+  .m2f-card-copy,
   .m2f-card-button__label {
     transition: none;
   }
@@ -185,7 +274,34 @@
 
 @media (prefers-reduced-motion: reduce) {
   .m2f-button,
+  .m2f-button__main,
+  .m2f-button__copy,
   #m2f-freedium-toast {
     transition: none;
+  }
+}
+
+/* Small screens / mobile: tuck the floating button closer to the corner and
+   trim its padding so it doesn't dominate a narrow viewport. */
+@media (max-width: 600px) {
+  .m2f-button {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .m2f-button__main {
+    padding: 10px 12px 10px 15px;
+    font-size: 14px;
+  }
+
+  .m2f-button__copy {
+    padding: 10px 12px;
+  }
+
+  #m2f-freedium-toast {
+    right: 16px;
+    bottom: 72px;
+    left: 16px; /* let a long message wrap instead of overflowing */
+    text-align: center;
   }
 }

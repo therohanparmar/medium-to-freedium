@@ -19,7 +19,9 @@
     ).replace(/\/+$/, "") + "/";
 
   const BUTTON_ID = "m2f-freedium-button";
-  const CARD_BUTTON_CLASS = "m2f-card-button";
+  const CARD_GROUP_CLASS = "m2f-card-actions"; // wraps the two card buttons
+  const CARD_BUTTON_CLASS = "m2f-card-button"; // "read on Freedium" card button
+  const CARD_COPY_CLASS = "m2f-card-copy"; // "copy Freedium link" card button
   const CARD_DONE_ATTR = "data-m2f-card";
   const TOAST_ID = "m2f-freedium-toast";
   const TOAST_DURATION_MS = 2200;
@@ -98,21 +100,98 @@
     return svg;
   };
 
+  // A clipboard/copy glyph for the "copy Freedium link" segment.
+  const createCopyIcon = (size = 16) => {
+    const svg = document.createElementNS(SVG_NS, "svg");
+    Object.entries({
+      class: "m2f-button__copy-icon",
+      viewBox: "0 0 24 24",
+      width: String(size),
+      height: String(size),
+      fill: "none",
+      stroke: "currentColor",
+      "stroke-width": "2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "aria-hidden": "true",
+      focusable: "false",
+    }).forEach(([name, value]) => svg.setAttribute(name, value));
+
+    const rect = document.createElementNS(SVG_NS, "rect");
+    Object.entries({ x: "9", y: "9", width: "13", height: "13", rx: "2", ry: "2" })
+      .forEach(([name, value]) => rect.setAttribute(name, value));
+
+    const path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("d", "M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1");
+
+    svg.append(rect, path);
+    return svg;
+  };
+
+  // Copy text to the clipboard. Uses the async Clipboard API where available
+  // (Medium is https, so it is), with a hidden-textarea fallback. Returns a
+  // promise for whether the copy succeeded.
+  const copyText = async (text) => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      /* fall through to the legacy path */
+    }
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-9999px";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const ok = document.execCommand("copy");
+      textarea.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  };
+
+  // Split button: a main segment that opens Freedium plus a segment that copies
+  // the article's Freedium link to the clipboard.
   const createButton = () => {
-    const button = document.createElement("button");
-    button.id = BUTTON_ID;
-    button.type = "button";
-    button.className = "m2f-button";
-    button.setAttribute("aria-label", "Read this article on Freedium");
-    button.title = "Read on Freedium";
+    const root = document.createElement("div");
+    root.id = BUTTON_ID;
+    root.className = "m2f-button";
+
+    // --- Main action: open the article on Freedium ---
+    const main = document.createElement("button");
+    main.type = "button";
+    main.className = "m2f-button__main";
+    main.setAttribute("aria-label", "Read this article on Freedium");
+    main.title = "Read on Freedium";
 
     const label = document.createElement("span");
     label.className = "m2f-button__label";
     label.textContent = "Read on Freedium";
+    main.append(createBookIcon(), label);
+    main.addEventListener("click", () => openOnFreedium());
 
-    button.append(createBookIcon(), label);
-    button.addEventListener("click", () => openOnFreedium());
-    return button;
+    // --- Copy: put the Freedium link on the clipboard ---
+    const copy = document.createElement("button");
+    copy.type = "button";
+    copy.className = "m2f-button__copy";
+    copy.setAttribute("aria-label", "Copy Freedium link");
+    copy.title = "Copy Freedium link";
+    copy.appendChild(createCopyIcon());
+    copy.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      const ok = await copyText(buildFreediumUrl());
+      showToast(ok ? "Freedium link copied" : "Couldn't copy the link");
+    });
+
+    root.append(main, copy);
+    return root;
   };
 
   // --- Listing-card buttons --------------------------------------------------
@@ -121,27 +200,62 @@
   // We add a compact "Freedium" pill into each card's action toolbar so users
   // can jump straight to the free reader without opening the story first.
 
-  const createCardButton = () => {
+  // Builds one card control: a compact icon button with a tooltip label. The
+  // click handler reads the story's Freedium URL from the group's dataset (set
+  // in placePill) so a single URL feeds both the read and copy buttons.
+  const createCardControl = (className, ariaLabel, icon, onActivate) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = CARD_BUTTON_CLASS;
-    button.setAttribute("aria-label", "Read this story on Freedium");
-    button.title = "Read on Freedium";
+    button.className = className;
+    button.setAttribute("aria-label", ariaLabel);
+    button.title = ariaLabel;
 
     const label = document.createElement("span");
     label.className = "m2f-card-button__label";
-    label.textContent = "Read on Freedium";
+    label.textContent = ariaLabel;
 
-    button.append(createBookIcon(16), label);
+    button.append(icon, label);
     button.addEventListener("click", (event) => {
       // The toolbar lives inside the card; stop the click from bubbling to any
-      // surrounding link/handler and open the URL captured on the button.
+      // surrounding link/handler before running the action.
       event.preventDefault();
       event.stopPropagation();
-      const url = button.dataset.freediumUrl;
-      if (url) openOnFreedium(url);
+      onActivate();
     });
     return button;
+  };
+
+  // A card's action group: "Read on Freedium" plus "Copy Freedium link". Both
+  // buttons read the story URL from the group's dataset so it stays in sync
+  // when Medium recycles a card.
+  const createCardActions = () => {
+    const group = document.createElement("span");
+    group.className = CARD_GROUP_CLASS;
+
+    const read = createCardControl(
+      CARD_BUTTON_CLASS,
+      "Read on Freedium",
+      createBookIcon(18),
+      () => {
+        const url = group.dataset.freediumUrl;
+        if (url) openOnFreedium(url);
+      },
+    );
+
+    const copy = createCardControl(
+      CARD_COPY_CLASS,
+      "Copy Freedium link",
+      createCopyIcon(13),
+      async () => {
+        const url = group.dataset.freediumUrl;
+        if (!url) return;
+        const ok = await copyText(url);
+        showToast(ok ? "Freedium link copied" : "Couldn't copy the link");
+      },
+    );
+
+    group.append(read, copy);
+    return group;
   };
 
   // Derive a story's Freedium URL from the first link in the card whose path
@@ -191,23 +305,23 @@
   // self-healing across Medium's re-renders.
   const placePill = (parent, before, freediumUrl) => {
     if (!parent) return;
-    let button = parent.querySelector(`:scope > .${CARD_BUTTON_CLASS}`);
-    if (!button) {
-      button = createCardButton();
+    let group = parent.querySelector(`:scope > .${CARD_GROUP_CLASS}`);
+    if (!group) {
+      group = createCardActions();
       if (before && before.parentElement === parent) {
-        parent.insertBefore(button, before);
+        parent.insertBefore(group, before);
       } else {
-        parent.appendChild(button);
+        parent.appendChild(group);
       }
     }
-    button.dataset.freediumUrl = freediumUrl; // keep fresh if a card recycles
+    group.dataset.freediumUrl = freediumUrl; // keep fresh if a card recycles
   };
 
   // Injects a single Freedium pill into each feed card, at the end of the left
   // cluster (claps/responses/repost) so it hugs those icons; that cluster is
   // the sibling right before the dislike wrapper. Medium renders more than one
   // toolbar copy per card for responsive layouts, and at some widths more than
-  // one is visible — so we target the visible toolbar and strip any strays to
+  // one is visible, so we target the visible toolbar and strip any strays to
   // avoid duplicate pills.
   const ensureCardButtons = () => {
     if (isFreedium()) return;
@@ -216,7 +330,7 @@
     )) {
       // Sticky: if a pill is already in place, keep exactly one and leave it be.
       // Re-evaluating/moving a placed pill is what makes it flicker, so we don't.
-      const pills = article.querySelectorAll(`.${CARD_BUTTON_CLASS}`);
+      const pills = article.querySelectorAll(`.${CARD_GROUP_CLASS}`);
       if (pills.length) {
         for (let i = 1; i < pills.length; i++) pills[i].remove();
         if (pills[0].isConnected) continue;
@@ -254,7 +368,7 @@
     const state = article.getAttribute(CARD_DONE_ATTR);
     if (state === "skip") return false;
     if (state !== "done") return true;
-    return !article.querySelector(`.${CARD_BUTTON_CLASS}`);
+    return !article.querySelector(`.${CARD_GROUP_CLASS}`);
   };
 
   // A card we already finished but whose pill a re-render just stripped. These
@@ -262,7 +376,7 @@
   // brand-new cards can wait for the debounce.
   const cardLostButton = (article) =>
     article.getAttribute(CARD_DONE_ATTR) === "done" &&
-    !article.querySelector(`.${CARD_BUTTON_CLASS}`);
+    !article.querySelector(`.${CARD_GROUP_CLASS}`);
 
   // Adds the button on article views and removes it everywhere else. Idempotent.
   const ensureButton = () => {
@@ -329,7 +443,7 @@
     ];
     // A re-render that strips a placed pill must be undone in this same callback
     // (a microtask, before the browser paints) so the pill never visibly blinks.
-    // Brand-new cards from infinite scroll have no such constraint — debounce.
+    // Brand-new cards from infinite scroll have no such constraint, so debounce.
     if (cards.some(cardLostButton)) {
       ensureCardButtons();
     } else if (cards.some(cardNeedsButton)) {
