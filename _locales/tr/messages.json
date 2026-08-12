@@ -1,0 +1,92 @@
+{
+  "extensionName": {
+    "message": "Freedium - Medium Makalelerini Ücretsiz Okuyun",
+    "description": "Extension name shown in the browser's extension management page and store listing. Keep the brand name 'Freedium' untranslated."
+  },
+  "extensionDescription": {
+    "message": "Herhangi bir Medium makalesini tek tıklamayla Freedium'da okuyun.",
+    "description": "Extension description shown in the browser's extension management page and store listing. Keep 'Freedium' and 'Medium' untranslated as brand names."
+  },
+  "extensionTitle": {
+    "message": "Freedium'da Aç",
+    "description": "Toolbar icon tooltip, and the popup/changelog page title. Keep 'Freedium' untranslated as a brand name."
+  },
+  "versionLabel": {
+    "message": "Sürüm",
+    "description": "Label preceding the installed version number in the popup, e.g. 'Version 2.0.0'."
+  },
+  "popupBlurb": {
+    "message": "Herhangi bir Medium makalesini Freedium'da açın: makale sayfasındaki yeşil düğmeye veya besleme kartındaki Freedium simgesine tıklayın.",
+    "description": "Short explanation shown in the toolbar popup. Keep 'Medium' and 'Freedium' untranslated as brand names."
+  },
+  "whatsNew": {
+    "message": "Yenilikler",
+    "description": "Label for the changelog button in the popup, and the changelog page's own title/heading."
+  },
+  "contributeGithub": {
+    "message": "GitHub'da Katkıda Bulunun",
+    "description": "Link text in the popup pointing to the project's GitHub repository. Keep 'GitHub' untranslated as a brand name."
+  },
+  "privacyPolicy": {
+    "message": "Gizlilik Politikası",
+    "description": "Link text in the popup pointing to the privacy policy document."
+  },
+  "privacyShort": {
+    "message": "Gizlilik",
+    "description": "Short link text in the changelog page footer pointing to the privacy policy document."
+  },
+  "socialLinksAriaLabel": {
+    "message": "Sosyal medya bağlantıları",
+    "description": "Accessible label for the row of social-media icon links on the changelog page."
+  },
+  "footerMeta": {
+    "message": "Freedium'da Aç · © $YEAR$ Rohan Parmar",
+    "description": "Copyright line in the changelog page footer. Keep 'Freedium' and the person's name 'Rohan Parmar' untranslated.",
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
+  },
+  "subtitleWelcome": {
+    "message": "Kurduğunuz için teşekkürler! Freedium'da Aç'ın yapabildiği her şey ve her sürümde gelenler burada.",
+    "description": "Changelog page subtitle shown right after the extension is first installed. Keep 'Freedium' untranslated as a brand name."
+  },
+  "subtitleDefault": {
+    "message": "Freedium'da Aç'ın nasıl geliştiğini takip edin. Aşağıdaki her sürüm, size sunulan en önemli iyileştirmeleri vurgular.",
+    "description": "Changelog page subtitle shown on normal (non-welcome) visits. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readOnFreedium": {
+    "message": "Freedium'da Oku",
+    "description": "Label/title for the button that opens the current Medium article on Freedium. Used on both the floating article button and each feed card. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readArticleAriaLabel": {
+    "message": "Bu makaleyi Freedium'da oku",
+    "description": "Accessible label for the floating button on a Medium article page that opens it on Freedium. Keep 'Freedium' untranslated as a brand name."
+  },
+  "copyFreediumLink": {
+    "message": "Freedium bağlantısını kopyala",
+    "description": "Label/title/aria-label for the button that copies the article's Freedium link to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastOpening": {
+    "message": "Makale Freedium'da açılıyor…",
+    "description": "Toast message shown while the article opens on Freedium in a new tab. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastLinkCopied": {
+    "message": "Freedium bağlantısı kopyalandı",
+    "description": "Toast message shown after the Freedium link was copied to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastCopyFailed": {
+    "message": "Bağlantı kopyalanamadı",
+    "description": "Toast message shown when copying the Freedium link to the clipboard failed."
+  },
+  "latest": {
+    "message": "En yeni",
+    "description": "Badge/tag label marking the most recent release on the changelog timeline."
+  },
+  "websiteAriaLabel": {
+    "message": "Web sitesi",
+    "description": "Accessible label for the personal website link icon in the changelog page's social links row."
+  }
+}

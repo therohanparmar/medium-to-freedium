@@ -1,0 +1,92 @@
+{
+  "extensionName": {
+    "message": "Freedium - Leggi gli articoli di Medium gratis",
+    "description": "Extension name shown in the browser's extension management page and store listing. Keep the brand name 'Freedium' untranslated."
+  },
+  "extensionDescription": {
+    "message": "Leggi qualsiasi articolo di Medium su Freedium con un clic.",
+    "description": "Extension description shown in the browser's extension management page and store listing. Keep 'Freedium' and 'Medium' untranslated as brand names."
+  },
+  "extensionTitle": {
+    "message": "Apri in Freedium",
+    "description": "Toolbar icon tooltip, and the popup/changelog page title. Keep 'Freedium' untranslated as a brand name."
+  },
+  "versionLabel": {
+    "message": "Versione",
+    "description": "Label preceding the installed version number in the popup, e.g. 'Version 2.0.0'."
+  },
+  "popupBlurb": {
+    "message": "Apri qualsiasi articolo di Medium su Freedium: clicca sul pulsante verde nella pagina dell'articolo, oppure sull'icona di Freedium in una card del feed.",
+    "description": "Short explanation shown in the toolbar popup. Keep 'Medium' and 'Freedium' untranslated as brand names."
+  },
+  "whatsNew": {
+    "message": "Novità",
+    "description": "Label for the changelog button in the popup, and the changelog page's own title/heading."
+  },
+  "contributeGithub": {
+    "message": "Contribuisci su GitHub",
+    "description": "Link text in the popup pointing to the project's GitHub repository. Keep 'GitHub' untranslated as a brand name."
+  },
+  "privacyPolicy": {
+    "message": "Informativa sulla privacy",
+    "description": "Link text in the popup pointing to the privacy policy document."
+  },
+  "privacyShort": {
+    "message": "Privacy",
+    "description": "Short link text in the changelog page footer pointing to the privacy policy document."
+  },
+  "socialLinksAriaLabel": {
+    "message": "Link social",
+    "description": "Accessible label for the row of social-media icon links on the changelog page."
+  },
+  "footerMeta": {
+    "message": "Apri in Freedium · © $YEAR$ Rohan Parmar",
+    "description": "Copyright line in the changelog page footer. Keep 'Freedium' and the person's name 'Rohan Parmar' untranslated.",
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
+  },
+  "subtitleWelcome": {
+    "message": "Grazie per aver installato l'estensione! Ecco tutto quello che Open in Freedium può fare e le novità di ogni versione.",
+    "description": "Changelog page subtitle shown right after the extension is first installed. Keep 'Freedium' untranslated as a brand name."
+  },
+  "subtitleDefault": {
+    "message": "Scopri come si è evoluto Open in Freedium. Ogni versione qui sotto mette in evidenza i miglioramenti più importanti offerti a te.",
+    "description": "Changelog page subtitle shown on normal (non-welcome) visits. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readOnFreedium": {
+    "message": "Leggi su Freedium",
+    "description": "Label/title for the button that opens the current Medium article on Freedium. Used on both the floating article button and each feed card. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readArticleAriaLabel": {
+    "message": "Leggi questo articolo su Freedium",
+    "description": "Accessible label for the floating button on a Medium article page that opens it on Freedium. Keep 'Freedium' untranslated as a brand name."
+  },
+  "copyFreediumLink": {
+    "message": "Copia link Freedium",
+    "description": "Label/title/aria-label for the button that copies the article's Freedium link to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastOpening": {
+    "message": "Apertura dell'articolo su Freedium…",
+    "description": "Toast message shown while the article opens on Freedium in a new tab. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastLinkCopied": {
+    "message": "Link di Freedium copiato",
+    "description": "Toast message shown after the Freedium link was copied to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastCopyFailed": {
+    "message": "Impossibile copiare il link",
+    "description": "Toast message shown when copying the Freedium link to the clipboard failed."
+  },
+  "latest": {
+    "message": "Più recente",
+    "description": "Badge/tag label marking the most recent release on the changelog timeline."
+  },
+  "websiteAriaLabel": {
+    "message": "Sito web",
+    "description": "Accessible label for the personal website link icon in the changelog page's social links row."
+  }
+}

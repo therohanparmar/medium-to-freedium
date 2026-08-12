@@ -1,0 +1,92 @@
+{
+  "extensionName": {
+    "message": "Freedium - Soma Makala za Medium Bila Malipo",
+    "description": "Extension name shown in the browser's extension management page and store listing. Keep the brand name 'Freedium' untranslated."
+  },
+  "extensionDescription": {
+    "message": "Soma makala yoyote ya Medium kwenye Freedium kwa bofya moja.",
+    "description": "Extension description shown in the browser's extension management page and store listing. Keep 'Freedium' and 'Medium' untranslated as brand names."
+  },
+  "extensionTitle": {
+    "message": "Fungua kwenye Freedium",
+    "description": "Toolbar icon tooltip, and the popup/changelog page title. Keep 'Freedium' untranslated as a brand name."
+  },
+  "versionLabel": {
+    "message": "Toleo",
+    "description": "Label preceding the installed version number in the popup, e.g. 'Version 2.0.0'."
+  },
+  "popupBlurb": {
+    "message": "Fungua makala yoyote ya Medium kwenye Freedium: bofya kitufe cha kijani kwenye ukurasa wa makala, au aikoni ya Freedium kwenye kadi ya mlisho.",
+    "description": "Short explanation shown in the toolbar popup. Keep 'Medium' and 'Freedium' untranslated as brand names."
+  },
+  "whatsNew": {
+    "message": "Mapya",
+    "description": "Label for the changelog button in the popup, and the changelog page's own title/heading."
+  },
+  "contributeGithub": {
+    "message": "Changia kwenye GitHub",
+    "description": "Link text in the popup pointing to the project's GitHub repository. Keep 'GitHub' untranslated as a brand name."
+  },
+  "privacyPolicy": {
+    "message": "Sera ya Faragha",
+    "description": "Link text in the popup pointing to the privacy policy document."
+  },
+  "privacyShort": {
+    "message": "Faragha",
+    "description": "Short link text in the changelog page footer pointing to the privacy policy document."
+  },
+  "socialLinksAriaLabel": {
+    "message": "Viungo vya mitandao ya kijamii",
+    "description": "Accessible label for the row of social-media icon links on the changelog page."
+  },
+  "footerMeta": {
+    "message": "Fungua kwenye Freedium · © $YEAR$ Rohan Parmar",
+    "description": "Copyright line in the changelog page footer. Keep 'Freedium' and the person's name 'Rohan Parmar' untranslated.",
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
+  },
+  "subtitleWelcome": {
+    "message": "Asante kwa kusakinisha! Hii ndiyo kila kitu ambacho Fungua kwenye Freedium kinaweza kufanya, na kilichosasishwa katika toleo kila moja.",
+    "description": "Changelog page subtitle shown right after the extension is first installed. Keep 'Freedium' untranslated as a brand name."
+  },
+  "subtitleDefault": {
+    "message": "Fuatilia jinsi Fungua kwenye Freedium kimebadilika. Toleo kila moja hapa chini linaonyesha maboresho muhimu zaidi yaliyoletwa kwako.",
+    "description": "Changelog page subtitle shown on normal (non-welcome) visits. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readOnFreedium": {
+    "message": "Soma kwenye Freedium",
+    "description": "Label/title for the button that opens the current Medium article on Freedium. Used on both the floating article button and each feed card. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readArticleAriaLabel": {
+    "message": "Soma makala hii kwenye Freedium",
+    "description": "Accessible label for the floating button on a Medium article page that opens it on Freedium. Keep 'Freedium' untranslated as a brand name."
+  },
+  "copyFreediumLink": {
+    "message": "Nakili kiungo cha Freedium",
+    "description": "Label/title/aria-label for the button that copies the article's Freedium link to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastOpening": {
+    "message": "Inafungua makala kwenye Freedium…",
+    "description": "Toast message shown while the article opens on Freedium in a new tab. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastLinkCopied": {
+    "message": "Kiungo cha Freedium kimenakiliwa",
+    "description": "Toast message shown after the Freedium link was copied to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastCopyFailed": {
+    "message": "Imeshindikana kunakili kiungo",
+    "description": "Toast message shown when copying the Freedium link to the clipboard failed."
+  },
+  "latest": {
+    "message": "Mpya zaidi",
+    "description": "Badge/tag label marking the most recent release on the changelog timeline."
+  },
+  "websiteAriaLabel": {
+    "message": "Tovuti",
+    "description": "Accessible label for the personal website link icon in the changelog page's social links row."
+  }
+}

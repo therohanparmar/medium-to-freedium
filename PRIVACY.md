@@ -41,6 +41,6 @@ If this policy changes, the "Last updated" date above will be revised.
 
 ## Contact
 
-Maintainer: **Rohan Parmar** - [LinkedIn](https://www.linkedin.com/in/rohanrparmar/)
+Maintainer: **Rohan Parmar** - [LinkedIn](https://www.linkedin.com/in/rohanrparmar)
 · [X / Twitter](https://x.com/rohan__parmar).
 You can also open an issue on the project repository for questions.

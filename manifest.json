@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Freedium - Read Medium Articles Free",
-  "version": "2.0.0",
-  "description": "Read any Medium article on Freedium in one click.",
+  "name": "__MSG_extensionName__",
+  "version": "2.1.0",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
   "author": "Rohan Parmar",
   "homepage_url": "https://github.com/therohanparmar/medium-to-freedium",
   "browser_specific_settings": {
@@ -24,7 +25,7 @@
   },
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "Open in Freedium",
+    "default_title": "__MSG_extensionTitle__",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -32,8 +33,7 @@
     }
   },
   "background": {
-    "service_worker": "background.js",
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {

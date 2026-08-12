@@ -17,12 +17,15 @@
           alt=""
         />
         <div class="header__text">
-          <h1 class="header__title">Open in Freedium</h1>
-          <p class="header__version">Version <span id="version">–</span></p>
+          <h1 class="header__title" id="popup-title">Open in Freedium</h1>
+          <p class="header__version">
+            <span id="version-label">Version</span>
+            <span id="version">–</span>
+          </p>
         </div>
       </header>
 
-      <p class="blurb">
+      <p class="blurb" id="popup-blurb">
         Open any Medium article on Freedium: click the green button on an
         article page, or the Freedium icon on a feed card.
       </p>
@@ -34,6 +37,7 @@
       <nav class="links">
         <a
           class="links__item"
+          id="contribute-link"
           href="https://github.com/therohanparmar/medium-to-freedium"
           target="_blank"
           rel="noopener noreferrer"
@@ -41,6 +45,7 @@
         >
         <a
           class="links__item"
+          id="privacy-link"
           href="https://github.com/therohanparmar/medium-to-freedium/blob/main/PRIVACY.md"
           target="_blank"
           rel="noopener noreferrer"

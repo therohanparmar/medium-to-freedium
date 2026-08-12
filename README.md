@@ -79,7 +79,7 @@ developer setup, how it works, and the project structure.
 
 ## Author
 
-**Rohan Parmar** - [LinkedIn](https://www.linkedin.com/in/rohanrparmar/) · [X / Twitter](https://x.com/rohan__parmar)
+**Rohan Parmar** - [LinkedIn](https://www.linkedin.com/in/rohanrparmar) · [X / Twitter](https://x.com/rohan__parmar)
 
 ---
 
@@ -88,4 +88,4 @@ developer setup, how it works, and the project structure.
 This is an independent tool and is not affiliated with, endorsed by, or sponsored by
 Medium or Freedium. Please respect content creators and support the writers you value.
 
-<p align="center"><sub><strong>Open in Freedium</strong> · v2.0.0 · by <a href="https://www.linkedin.com/in/rohanrparmar/">Rohan Parmar</a></sub></p>
+<p align="center"><sub><strong>Open in Freedium</strong> · v2.1.0 · by <a href="https://www.linkedin.com/in/rohanrparmar">Rohan Parmar</a></sub></p>
