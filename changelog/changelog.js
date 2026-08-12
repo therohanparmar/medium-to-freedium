@@ -28,6 +28,19 @@
 /** @type {Release[]} */
 const CHANGELOG = [
   {
+    version: "2.1.0",
+    date: "2026-08-13",
+    tag: "Minor Release",
+    summary:
+      "The extension now speaks your browser's language, in every language Chrome and Firefox support.",
+    changes: [
+      {
+        lead: "Multi-Language Support",
+        text: "The floating button, feed-card buttons, toolbar popup, and this changelog page now render in whichever UI language your browser is set to, covering the full list of locales Chrome and Firefox support.",
+      },
+    ],
+  },
+  {
     version: "2.0.0",
     date: "2026-07-06",
     tag: "Major Release",
@@ -168,7 +181,7 @@ const buildEntry = (release, isLatest) => {
   date.textContent = formatDate(release.date);
   meta.appendChild(date);
 
-  const tagText = isLatest ? "Latest" : release.tag;
+  const tagText = isLatest ? chrome.i18n.getMessage("latest") : release.tag;
   if (tagText) {
     const sep = document.createElement("span");
     sep.className = "entry__sep";
@@ -192,13 +205,13 @@ const buildEntry = (release, isLatest) => {
 
   const version = document.createElement("h2");
   version.className = "entry__version";
-  version.textContent = `Version ${release.version}`;
+  version.textContent = `${chrome.i18n.getMessage("versionLabel")} ${release.version}`;
   head.appendChild(version);
 
   if (isLatest) {
     const pill = document.createElement("span");
     pill.className = "entry__pill";
-    pill.textContent = "Latest";
+    pill.textContent = chrome.i18n.getMessage("latest");
     head.appendChild(pill);
   }
   card.appendChild(head);
@@ -231,15 +244,49 @@ const buildEntry = (release, isLatest) => {
   return entry;
 };
 
+// Sets each element's text to the matching chrome.i18n message, so the page
+// renders in whichever UI language the browser is set to.
+const localize = () => {
+  document.documentElement.lang = chrome.i18n.getUILanguage();
+  document.title = chrome.i18n.getMessage("whatsNew");
+
+  const textIds = {
+    "page-heading": "whatsNew",
+    "privacy-link": "privacyShort",
+  };
+  for (const [id, messageName] of Object.entries(textIds)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = chrome.i18n.getMessage(messageName);
+  }
+
+  const socialsNav = document.getElementById("socials-nav");
+  if (socialsNav) {
+    socialsNav.setAttribute("aria-label", chrome.i18n.getMessage("socialLinksAriaLabel"));
+  }
+
+  const websiteLink = document.getElementById("website-link");
+  if (websiteLink) {
+    websiteLink.setAttribute("aria-label", chrome.i18n.getMessage("websiteAriaLabel"));
+  }
+
+  const footerMeta = document.getElementById("footer-meta");
+  if (footerMeta) {
+    const year = String(new Date().getFullYear());
+    footerMeta.textContent = chrome.i18n.getMessage("footerMeta", [year]);
+  }
+};
+
 const render = () => {
   const params = new URLSearchParams(location.search);
   const isWelcome = params.get("welcome") === "1";
 
+  localize();
+
   const subtitle = document.getElementById("page-subtitle");
   if (subtitle) {
-    subtitle.textContent = isWelcome
-      ? "Thanks for installing! Here's everything Open in Freedium can do, and what's shipped in each release."
-      : "Track how Open in Freedium has evolved. Each release below highlights the most important improvements shipped to you.";
+    subtitle.textContent = chrome.i18n.getMessage(
+      isWelcome ? "subtitleWelcome" : "subtitleDefault",
+    );
   }
 
   const timeline = document.getElementById("timeline");
@@ -248,9 +295,6 @@ const render = () => {
       timeline.appendChild(buildEntry(release, index === 0));
     });
   }
-
-  const year = document.getElementById("year");
-  if (year) year.textContent = String(new Date().getFullYear());
 };
 
 if (document.readyState === "loading") {

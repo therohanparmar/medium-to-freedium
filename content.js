@@ -69,7 +69,7 @@
   };
 
   const openOnFreedium = (url) => {
-    showToast("Opening article on Freedium…");
+    showToast(chrome.i18n.getMessage("toastOpening"));
     window.open(url || buildFreediumUrl(), "_blank", "noopener,noreferrer");
   };
 
@@ -168,12 +168,12 @@
     const main = document.createElement("button");
     main.type = "button";
     main.className = "m2f-button__main";
-    main.setAttribute("aria-label", "Read this article on Freedium");
-    main.title = "Read on Freedium";
+    main.setAttribute("aria-label", chrome.i18n.getMessage("readArticleAriaLabel"));
+    main.title = chrome.i18n.getMessage("readOnFreedium");
 
     const label = document.createElement("span");
     label.className = "m2f-button__label";
-    label.textContent = "Read on Freedium";
+    label.textContent = chrome.i18n.getMessage("readOnFreedium");
     main.append(createBookIcon(), label);
     main.addEventListener("click", () => openOnFreedium());
 
@@ -181,13 +181,17 @@
     const copy = document.createElement("button");
     copy.type = "button";
     copy.className = "m2f-button__copy";
-    copy.setAttribute("aria-label", "Copy Freedium link");
-    copy.title = "Copy Freedium link";
+    copy.setAttribute("aria-label", chrome.i18n.getMessage("copyFreediumLink"));
+    copy.title = chrome.i18n.getMessage("copyFreediumLink");
     copy.appendChild(createCopyIcon());
     copy.addEventListener("click", async (event) => {
       event.stopPropagation();
       const ok = await copyText(buildFreediumUrl());
-      showToast(ok ? "Freedium link copied" : "Couldn't copy the link");
+      showToast(
+        ok
+          ? chrome.i18n.getMessage("toastLinkCopied")
+          : chrome.i18n.getMessage("toastCopyFailed"),
+      );
     });
 
     root.append(main, copy);
@@ -234,7 +238,7 @@
 
     const read = createCardControl(
       CARD_BUTTON_CLASS,
-      "Read on Freedium",
+      chrome.i18n.getMessage("readOnFreedium"),
       createBookIcon(18),
       () => {
         const url = group.dataset.freediumUrl;
@@ -244,13 +248,17 @@
 
     const copy = createCardControl(
       CARD_COPY_CLASS,
-      "Copy Freedium link",
+      chrome.i18n.getMessage("copyFreediumLink"),
       createCopyIcon(13),
       async () => {
         const url = group.dataset.freediumUrl;
         if (!url) return;
         const ok = await copyText(url);
-        showToast(ok ? "Freedium link copied" : "Couldn't copy the link");
+        showToast(
+          ok
+            ? chrome.i18n.getMessage("toastLinkCopied")
+            : chrome.i18n.getMessage("toastCopyFailed"),
+        );
       },
     );
 

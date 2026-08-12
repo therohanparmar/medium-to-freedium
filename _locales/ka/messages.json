@@ -1,0 +1,92 @@
+{
+  "extensionName": {
+    "message": "Freedium - წაიკითხეთ Medium-ის სტატიები უფასოდ",
+    "description": "Extension name shown in the browser's extension management page and store listing. Keep the brand name 'Freedium' untranslated."
+  },
+  "extensionDescription": {
+    "message": "წაიკითხეთ ნებისმიერი Medium სტატია Freedium-ზე ერთი დაწკაპუნებით.",
+    "description": "Extension description shown in the browser's extension management page and store listing. Keep 'Freedium' and 'Medium' untranslated as brand names."
+  },
+  "extensionTitle": {
+    "message": "გახსენით Freedium-ში",
+    "description": "Toolbar icon tooltip, and the popup/changelog page title. Keep 'Freedium' untranslated as a brand name."
+  },
+  "versionLabel": {
+    "message": "ვერსია",
+    "description": "Label preceding the installed version number in the popup, e.g. 'Version 2.0.0'."
+  },
+  "popupBlurb": {
+    "message": "გახსენით ნებისმიერი Medium სტატია Freedium-ზე: დააწკაპუნეთ მწვანე ღილაკზე სტატიის გვერდზე, ან Freedium-ის ხატულაზე ფიდის ბარათზე.",
+    "description": "Short explanation shown in the toolbar popup. Keep 'Medium' and 'Freedium' untranslated as brand names."
+  },
+  "whatsNew": {
+    "message": "სიახლეები",
+    "description": "Label for the changelog button in the popup, and the changelog page's own title/heading."
+  },
+  "contributeGithub": {
+    "message": "შეიტანეთ წვლილი GitHub-ზე",
+    "description": "Link text in the popup pointing to the project's GitHub repository. Keep 'GitHub' untranslated as a brand name."
+  },
+  "privacyPolicy": {
+    "message": "კონფიდენციალურობის პოლიტიკა",
+    "description": "Link text in the popup pointing to the privacy policy document."
+  },
+  "privacyShort": {
+    "message": "კონფიდენციალურობა",
+    "description": "Short link text in the changelog page footer pointing to the privacy policy document."
+  },
+  "socialLinksAriaLabel": {
+    "message": "სოციალური ბმულები",
+    "description": "Accessible label for the row of social-media icon links on the changelog page."
+  },
+  "footerMeta": {
+    "message": "გახსენით Freedium-ში · © $YEAR$ Rohan Parmar",
+    "description": "Copyright line in the changelog page footer. Keep 'Freedium' and the person's name 'Rohan Parmar' untranslated.",
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
+  },
+  "subtitleWelcome": {
+    "message": "მადლობა დაინსტალირებისთვის! აქ არის ყველაფერი, რისი გაკეთებაც შეუძლია Open in Freedium-ს და რა ახალია თითოეულ ვერსიაში.",
+    "description": "Changelog page subtitle shown right after the extension is first installed. Keep 'Freedium' untranslated as a brand name."
+  },
+  "subtitleDefault": {
+    "message": "თვალი ადევნეთ, როგორ განვითარდა Open in Freedium. თითოეული ვერსია ქვემოთ გამოკვეთს თქვენთვის მიწოდებულ ყველაზე მნიშვნელოვან გაუმჯობესებებს.",
+    "description": "Changelog page subtitle shown on normal (non-welcome) visits. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readOnFreedium": {
+    "message": "წაიკითხეთ Freedium-ზე",
+    "description": "Label/title for the button that opens the current Medium article on Freedium. Used on both the floating article button and each feed card. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readArticleAriaLabel": {
+    "message": "წაიკითხეთ ეს სტატია Freedium-ზე",
+    "description": "Accessible label for the floating button on a Medium article page that opens it on Freedium. Keep 'Freedium' untranslated as a brand name."
+  },
+  "copyFreediumLink": {
+    "message": "დააკოპირეთ Freedium-ის ბმული",
+    "description": "Label/title/aria-label for the button that copies the article's Freedium link to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastOpening": {
+    "message": "სტატია იხსნება Freedium-ზე…",
+    "description": "Toast message shown while the article opens on Freedium in a new tab. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastLinkCopied": {
+    "message": "Freedium-ის ბმული დაკოპირდა",
+    "description": "Toast message shown after the Freedium link was copied to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastCopyFailed": {
+    "message": "ბმულის დაკოპირება ვერ მოხერხდა",
+    "description": "Toast message shown when copying the Freedium link to the clipboard failed."
+  },
+  "latest": {
+    "message": "უახლესი",
+    "description": "Badge/tag label marking the most recent release on the changelog timeline."
+  },
+  "websiteAriaLabel": {
+    "message": "ვებგვერდი",
+    "description": "Accessible label for the personal website link icon in the changelog page's social links row."
+  }
+}

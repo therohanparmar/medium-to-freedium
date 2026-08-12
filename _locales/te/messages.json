@@ -1,0 +1,92 @@
+{
+  "extensionName": {
+    "message": "Freedium - Medium ఆర్టికల్స్‌ను ఉచితంగా చదవండి",
+    "description": "Extension name shown in the browser's extension management page and store listing. Keep the brand name 'Freedium' untranslated."
+  },
+  "extensionDescription": {
+    "message": "ఏదైనా Medium ఆర్టికల్‌ను ఒక్క క్లిక్‌తో Freedium‌లో చదవండి.",
+    "description": "Extension description shown in the browser's extension management page and store listing. Keep 'Freedium' and 'Medium' untranslated as brand names."
+  },
+  "extensionTitle": {
+    "message": "Freedium‌లో తెరవండి",
+    "description": "Toolbar icon tooltip, and the popup/changelog page title. Keep 'Freedium' untranslated as a brand name."
+  },
+  "versionLabel": {
+    "message": "వెర్షన్",
+    "description": "Label preceding the installed version number in the popup, e.g. 'Version 2.0.0'."
+  },
+  "popupBlurb": {
+    "message": "ఏదైనా Medium ఆర్టికల్‌ను Freedium‌లో తెరవండి: ఆర్టికల్ పేజీలో ఉన్న ఆకుపచ్చ బటన్‌ను లేదా ఫీడ్ కార్డ్‌లో ఉన్న Freedium ఐకాన్‌ను క్లిక్ చేయండి.",
+    "description": "Short explanation shown in the toolbar popup. Keep 'Medium' and 'Freedium' untranslated as brand names."
+  },
+  "whatsNew": {
+    "message": "కొత్తవి ఏమిటి",
+    "description": "Label for the changelog button in the popup, and the changelog page's own title/heading."
+  },
+  "contributeGithub": {
+    "message": "GitHub‌లో సహకరించండి",
+    "description": "Link text in the popup pointing to the project's GitHub repository. Keep 'GitHub' untranslated as a brand name."
+  },
+  "privacyPolicy": {
+    "message": "గోప్యతా విధానం",
+    "description": "Link text in the popup pointing to the privacy policy document."
+  },
+  "privacyShort": {
+    "message": "గోప్యత",
+    "description": "Short link text in the changelog page footer pointing to the privacy policy document."
+  },
+  "socialLinksAriaLabel": {
+    "message": "సోషల్ మీడియా లింక్‌లు",
+    "description": "Accessible label for the row of social-media icon links on the changelog page."
+  },
+  "footerMeta": {
+    "message": "Freedium‌లో తెరవండి · © $YEAR$ Rohan Parmar",
+    "description": "Copyright line in the changelog page footer. Keep 'Freedium' and the person's name 'Rohan Parmar' untranslated.",
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
+  },
+  "subtitleWelcome": {
+    "message": "ఇన్‌స్టాల్ చేసినందుకు ధన్యవాదాలు! Freedium‌లో తెరవండి చేయగలిగినవన్నీ, మరియు ప్రతి విడుదలలో వచ్చినవి ఇక్కడ ఉన్నాయి.",
+    "description": "Changelog page subtitle shown right after the extension is first installed. Keep 'Freedium' untranslated as a brand name."
+  },
+  "subtitleDefault": {
+    "message": "Freedium‌లో తెరవండి ఎలా అభివృద్ధి చెందిందో ట్రాక్ చేయండి. దిగువ ప్రతి విడుదల మీకు అందించిన అతి ముఖ్యమైన మెరుగుదలలను హైలైట్ చేస్తుంది.",
+    "description": "Changelog page subtitle shown on normal (non-welcome) visits. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readOnFreedium": {
+    "message": "Freedium‌లో చదవండి",
+    "description": "Label/title for the button that opens the current Medium article on Freedium. Used on both the floating article button and each feed card. Keep 'Freedium' untranslated as a brand name."
+  },
+  "readArticleAriaLabel": {
+    "message": "ఈ ఆర్టికల్‌ను Freedium‌లో చదవండి",
+    "description": "Accessible label for the floating button on a Medium article page that opens it on Freedium. Keep 'Freedium' untranslated as a brand name."
+  },
+  "copyFreediumLink": {
+    "message": "Freedium లింక్‌ను కాపీ చేయండి",
+    "description": "Label/title/aria-label for the button that copies the article's Freedium link to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastOpening": {
+    "message": "ఆర్టికల్ Freedium‌లో తెరవబడుతోంది…",
+    "description": "Toast message shown while the article opens on Freedium in a new tab. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastLinkCopied": {
+    "message": "Freedium లింక్ కాపీ చేయబడింది",
+    "description": "Toast message shown after the Freedium link was copied to the clipboard. Keep 'Freedium' untranslated as a brand name."
+  },
+  "toastCopyFailed": {
+    "message": "లింక్‌ను కాపీ చేయలేకపోయాము",
+    "description": "Toast message shown when copying the Freedium link to the clipboard failed."
+  },
+  "latest": {
+    "message": "సరికొత్త",
+    "description": "Badge/tag label marking the most recent release on the changelog timeline."
+  },
+  "websiteAriaLabel": {
+    "message": "వెబ్‌సైట్",
+    "description": "Accessible label for the personal website link icon in the changelog page's social links row."
+  }
+}

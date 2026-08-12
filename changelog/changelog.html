@@ -18,16 +18,40 @@
           height="64"
           alt="Open in Freedium"
         />
-        <h1 class="sr-only">What's New</h1>
+        <h1 class="sr-only" id="page-heading">What's New</h1>
         <p class="masthead__subtitle" id="page-subtitle">
           Track how Open in Freedium has evolved. Each release below highlights
           the most important improvements shipped to you.
         </p>
 
-        <nav class="socials" aria-label="Rohan Parmar on social platforms">
+        <nav class="socials" id="socials-nav" aria-label="Rohan Parmar on social platforms">
           <a
             class="social"
-            href="https://www.linkedin.com/in/rohanrparmar/"
+            id="website-link"
+            href="https://rohanparmar.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Website"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              />
+            </svg>
+          </a>
+          <a
+            class="social"
+            href="https://www.linkedin.com/in/rohanrparmar"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -96,13 +120,14 @@
         <span class="footer__dot" aria-hidden="true">·</span>
         <a
           class="footer__link"
+          id="privacy-link"
           href="https://github.com/therohanparmar/medium-to-freedium/blob/main/PRIVACY.md"
           target="_blank"
           rel="noopener noreferrer"
           >Privacy</a
         >
-        <p class="footer__meta">
-          Open in Freedium · © <span id="year">2026</span> Rohan Parmar
+        <p class="footer__meta" id="footer-meta">
+          Open in Freedium · © 2026 Rohan Parmar
         </p>
       </footer>
     </main>
